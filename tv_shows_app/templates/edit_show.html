@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Show</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <a href="/shows" style="margin-left: 275px;">Go Back</a>
+    <h1>Edit {{ showInfo.title }}</h1>
+
+    <!-- entering validation messages before the form -->
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form action="/shows/{{showInfo.id}}/update" method="post">   
+        {% csrf_token %}
+        <label for="title">Title</label>
+        <br>
+        <input type="text" name="form_title" id="title">
+        <br>
+        <br>
+        <label for="network">Network</label>
+        <label for="release_date" style="margin-left: 125px;">Release Date</label>
+        <br>
+        <input type="text" name="form_network" id="network">
+        <input type="date" name="form_release_date" id="release_date">
+        <br>
+        <br>
+        <label for="description">Description</label>
+        <br>
+        <textarea name="form_description" id="description" cols="30" rows="15"></textarea>
+        <br>
+        <br>
+        <input type="submit" value="Update">
+    </form>
+    <br>
+    <a href="/shows/{{showInfo.id}}">Go to Show</a>
+</body>
+</html>
